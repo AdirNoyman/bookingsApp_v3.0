@@ -1,24 +1,12 @@
-{{template "base" .}}
+{{/*Use the template named "base" and receive any data (that's what the dot is for)*/}}
+{{ template "base" .}}
 
-{{define "content"}}
+{{ define "content"}}
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1>This is the About page 🤓</h1>
-                <h4>This is a template of cache 🤷‍♂️</h4>
-{{/* activate the function 'index' -> look at data that has indexes(keys) and look at all the data that is passed to the template (represented by the dot) and get the value from index(key) "test"*/}}
-                <p>This came from the template: {{index .StringMap "test"}}</p>
+                <h1>This is the About Page 😉</h1>
 
-                <p>{{ if ne (index .StringMap "remote_ip") "" }}
-
-                        Your remote IP address is {{index .StringMap "remote_ip"}}
-
-                 {{else}}
-
-                    I don't have your IP address yet. Visit our <a href="/">home page</a> and then come back
-            {{end}}
-
-        </p>
             </div>
         </div>
 

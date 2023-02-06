@@ -1,0 +1,35 @@
+html {
+	margin: 0;
+}
+body {
+	min-height: 100vh;
+}
+.my-footer {
+	height: 10em;
+	background-color: #212529;
+	margin-top: 100%;
+	padding: 1em;
+	color: #fff;
+	font-size: 80%;
+	margin-bottom: 0;
+}
+.room-img {
+	max-width: 50%;
+}
+#footer {
+	margin-bottom: 0;
+}
+.container {
+	height: 100%;
+}
+
+h1 {
+	margin-bottom: 5%;
+}
+#reservation-dates {
+	margin-bottom: 3%;
+}
+/* After notie styles are applied to DOM: */
+.notie-container {
+	box-shadow: none;
+}

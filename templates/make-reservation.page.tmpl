@@ -1,0 +1,96 @@
+{{/*Use the template named "base" and receive any data (that's what the dot is for)*/}}
+{{ template "base" .}}
+
+{{ define "content"}}
+    <div class="container">
+        <div class="col-lg-10">
+            <br>
+            <h1>Make Reservation</h1>
+            <p><strong>Reservation Details:</strong></p>
+            <form id="reservation-input" class="row g-3 needs-validation" novalidate>
+                <div class="col-md-6">
+                    <label for="first_name" class="form-label"
+                    >First name</label
+                    >
+                    <input
+                            required
+                            type="text"
+                            class="form-control"
+                            id="first_name"
+                            name="first_name"
+                    />
+                </div>
+                <div class="col-md-6">
+                    <label for="last_name" class="form-label"
+                    >Last name</label
+                    >
+                    <input
+                            required
+                            type="text"
+                            class="form-control"
+                            id="last_name"
+                            name="last_name"
+                    />
+                </div>
+                <div class="col-md-6">
+                    <label for="inputEmail4" class="form-label"
+                    >Email</label
+                    >
+                    <input
+                            required
+                            type="email"
+                            class="form-control"
+                            id="inputEmail4"
+                    />
+                </div>
+                <div class="col-md-6">
+                    <label for="phone_number" class="form-label"
+                    >Phone Number</label
+                    >
+                    <input
+                            required
+                            type="tel"
+                            class="form-control"
+                            id="phone_number"
+                            name="phone_number"
+                    />
+                </div>
+
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">
+                        Make Reservation
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+{{end}}
+
+{{define "js"}}
+    <script>
+        // ****** Taken from BootStrap framework ********
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict';
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            let forms = document.querySelectorAll('.needs-validation');
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener(
+                    'submit',
+                    function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+
+                        form.classList.add('was-validated');
+                    },
+                    false
+                );
+            });
+        })();
+    </script>
+{{end}}

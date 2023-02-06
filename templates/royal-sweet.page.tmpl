@@ -1,0 +1,114 @@
+{{/*Use the template named "base" and receive any data (that's what the dot is for)*/}}
+{{ template "base" .}}
+
+{{ define "content"}}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <img
+                        src="/static/images/royal-sweet.png"
+                        alt="presidental-sweet"
+                        class="img-fluid img-thumbnail mx-auto d-block room-img"
+                />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h1 class="text-center mt-4">Royal Sweet</h1>
+                <p>
+                    Lorem Ipsum is simply dummy text of the printing and
+                    typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s,
+                    when an unknown printer took a galley of type and
+                    scrambled it to make a type specimen book. Lorem Ipsum
+                    is simply dummy text of the printing and typesetting
+                    industry. Lorem Ipsum has been the industry's standard
+                    dummy text ever since the 1500s, when an unknown printer
+                    took a galley of type and scrambled it to make a type
+                    specimen book.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <a id="check-dates-modal" href="#!" class="btn btn-success"
+                >Check Availability</a
+                >
+            </div>
+        </div>
+    </div>
+{{end}}
+
+{{define "js"}}
+
+    <script>
+        let attention = Prompt();
+        document
+            .getElementById('check-dates-modal')
+            .addEventListener('click', () => {
+                let html = `
+
+        			<form id="check-availability-form" action="" method="POST" novalidate class="needs-validation" autocomplete="off">
+        						<div class="row">
+        							<div class="col"  style="overflow: hidden">
+        							<div class="row"  id="reservation-dates-modal">
+        								<div class="col">
+        									<input type="text" required class="form-control" name="start" id="start" placeholder="Arrival" />
+        								</div>
+        								<div class="col">
+        									<input type="text" required class="form-control" name="end" id="end" placeholder="Departure"/>
+        								</div>
+        							</div>
+        							</div>
+        						</div>
+
+        			</form>
+        			`;
+
+                attention.custom({
+                    msg: html,
+                    title: 'Choose your dates please 🤓',
+
+                    // A function that will run before the sweetAlert pop-up is displayed
+                    willOpen: () => {
+                        const el = document.getElementById(
+                            'reservation-dates-modal'
+                        );
+                        const rp = new DateRangePicker(el, {
+                            format: 'dd-mm-yyyy',
+                            showOnFocus: false,
+                            autohide: true,
+                        });
+                    },
+                    didOpen: () => {
+                        document.getElementsByClassName(
+                            'swal2-actions'
+                        )[0].style.zIndex = '0';
+                    },
+                    // This function will be called if the user didn't hit the cancel button and the input fields are full
+                    callback: function(result) {
+                        console.log("Callback called 🤓")
+                        // get the form
+                        let form = document.getElementById("check-availability-form")
+                        // get the form's data
+                        let formData = new FormData(form)
+                        formData.append("csrf_token", "{{.CSRFToken}}");
+                        // send a fetch request as a post request, with the data in the search availability form
+                        fetch('/search-availability-json', {
+                            method: "post",
+                            body: formData
+
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log(data)
+                                console.log(data.ok)
+                                console.log(data.message)
+
+                            })
+                    }
+                });
+            });
+
+    </script>
+{{end}}
